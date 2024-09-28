@@ -12,6 +12,7 @@ import Link from 'next/link';
 
 const TopBar = async () => {
   const session = await getServerSession();
+  console.log('SESSION: ', session);
   return (
     <header className="bg-blue-50 flex justify-between py-2  shadow-md items-center">
       <div>Ben Geeks Next Js Template</div>
