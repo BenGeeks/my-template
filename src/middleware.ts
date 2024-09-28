@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-const publicPaths = ['/user/sign-in', '/user/sign-out', '/user/sign-up'];
+const publicPaths = ['/user/sign-in', '/user/sign-out', '/user/sign-up', '/api/auth'];
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -21,12 +21,9 @@ export async function middleware(req: NextRequest) {
   }
 
   const session = await getToken({ req });
-  console.log('SESSION: ', session);
-  if (!session) {
-    const signInUrl = new URL(`/signin`, origin);
-    signInUrl.searchParams.set('callbackUrl', req.url);
-    return NextResponse.redirect(signInUrl);
-  }
+  // if (!session) {
+  //   return NextResponse.redirect('http://localhost:3000/api/auth/signin');
+  // }
 
   return NextResponse.next();
 }
